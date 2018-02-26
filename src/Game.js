@@ -128,6 +128,7 @@ class Game extends Component {
           ""
         )}
 
+
         <div className="info-bar">
           <div className="info">
             {this.props.isYourMove ? "Is your move" : "Rival move"}
