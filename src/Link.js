@@ -133,26 +133,32 @@ class Link extends Component {
       room
     } = this.state;
     let isFirstUser = this.path==='';
-    let isYourMove = !isFirstUser ? userSeq : !userSeq;
 
     let winner = calculateWinner(this.state.gameMap);
     let youWin =
       userId === 0 ? winner === firstUserFig : winner === secondUserFig;
-    let draw = winner === 1;
-    let gameOver = winner !== null;
+
+    const props ={
+      squares:gameMap,
+      draw: winner === 1,
+      room,
+      isYourMove:!isFirstUser ? userSeq : !userSeq,
+      isFirstUser,
+      secondUserInGame,
+      winner:youWin,
+      gameOver: winner !== null,
+      clickHandler:this.gameMapHandler,
+      choosedFig: firstUserFig,
+      username,
+      message,
+      messages,
+      sendMessage:this.sendMessage,
+      userId
+  }
 
     return (
       <div className="box">
-        <Game
-          clickHandler={this.gameMapHandler}
-          gameOver={gameOver}
-          winner={youWin}
-          secondUserInGame={secondUserInGame}
-          room={room}
-          draw={draw}
-          squares={gameMap}
-          isYourMove={isYourMove}
-          isFirstUser={isFirstUser}
+        <Game {...props}
           oneMoreHandler={el =>
             this.setState({
               gameMap: Array(9).fill(null),
@@ -165,16 +171,9 @@ class Link extends Component {
               secondUserFig: el === "X" ? "O" : "X"
             });
           }}
-          choosedFig={firstUserFig}
         />
 
-        <Chat
-          secondUserInGame={secondUserInGame}
-          username={username}
-          message={message}
-          messages={messages}
-          sendMessage={this.sendMessage}
-          userId={userId}
+        <Chat {...props}
           messageChange={ev =>
             this.setState({
               message: ev

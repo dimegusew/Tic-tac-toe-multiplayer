@@ -115,7 +115,7 @@ class Game extends Component {
     return (
       <div className="Game">
         {(isFirstUser && !secondUserInGame) || gameOver ? (
-          <Popup
+          <Popup props
             gameOver={gameOver}
             onClick={el => figChoose(el.target.id)}
             choosedFig={choosedFig}

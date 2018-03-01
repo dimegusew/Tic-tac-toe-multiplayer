@@ -53,6 +53,7 @@ io.on("connection", socket => {
         }
       });
 
+
       socket.on("SEND_MESSAGE", data => { //seecond user message sending
         io.to(roomId).emit("RECEIVE_MESSAGE", data);
       });
