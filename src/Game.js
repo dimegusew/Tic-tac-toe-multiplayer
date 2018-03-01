@@ -112,22 +112,18 @@ class Game extends Component {
       oneMoreHandler,
       draw
     } = this.props;
+    let {...props} = this.props;
+    console.log(props)
     return (
       <div className="Game">
         {(isFirstUser && !secondUserInGame) || gameOver ? (
-          <Popup props
-            gameOver={gameOver}
+          <Popup
+            {...props}
             onClick={el => figChoose(el.target.id)}
-            choosedFig={choosedFig}
-            room={room}
-            draw={draw}
-            winner={winner}
-            oneMoreHandler={oneMoreHandler}
           />
         ) : (
           ""
         )}
-
 
         <div className="info-bar">
           <div className="info">
